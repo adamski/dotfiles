@@ -1,0 +1,10 @@
+.DS_Store
+
+# Ignore everything
+*
+
+# But not these files...
+!.gitignore
+!.vimrc
+!.gvimrc
+!.zshrc

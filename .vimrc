@@ -72,6 +72,7 @@ Plugin 'tpope/vim-sensible'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'moll/vim-node'
 Plugin 'marijnh/tern_for_vim'
+Plugin 'jiangmiao/auto-pairs'
 
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -92,6 +93,11 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+
+set expandtab
+set shiftwidth=4
+set softtabstop=4
+
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
