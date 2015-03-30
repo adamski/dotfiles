@@ -54,12 +54,60 @@ export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 source $ZSH/oh-my-zsh.sh
 
+source ~/.oh-my-zsh/custom/plugins/opp.zsh/opp.zsh
+
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+        RPS1="${${KEYMAP/(vicmd|opp)/$VIM_PROMPT}/(main|viins)/}"
+            zle reset-prompt
+
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=20
+bindkey -v
+
+bindkey "${key[Up]}" up-line-or-local-history
+bindkey "${key[Down]}" down-line-or-local-history
+
+up-line-or-local-history() {
+    zle set-local-history 1
+    zle up-line-or-history
+    zle set-local-history 0
+}
+zle -N up-line-or-local-history
+down-line-or-local-history() {
+    zle set-local-history 1
+    zle down-line-or-history
+    zle set-local-history 0
+}
+zle -N down-line-or-local-history
+
+bindkey "^[[1;5A" up-line-or-history    # [CTRL] + Cursor up
+bindkey "^[[1;5B" down-line-or-history  # [CTRL] + Cursor down"]]]]"
+
+# Use jk for ESC
+# bindkey -M viins 'jk' vi-cmd-mode
+#
+# # Use vim cli mode
+# bindkey '^P' up-history
+# bindkey '^N' down-history
+#
+# # backspace and ^h working even after returning from command mode
+# bindkey '^?' backward-delete-char
+# bindkey '^h' backward-delete-char
+#
+# # ctrl-w removed word backwards
+# bindkey '^w' backward-kill-word
+#
+# # ctrl-r starts searching history backward
+# bindkey '^r' history-incremental-search-backward
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
 # else
 #   export EDITOR='mvim'
 # fi
