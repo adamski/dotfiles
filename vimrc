@@ -1,5 +1,4 @@
 set nocompatible              " be iMproved, required
-filetype off                  " required
 
 let g:Powerline_symbols = 'fancy'
 set encoding=utf-8
@@ -17,6 +16,11 @@ set backupdir=~/tmp/vim/backup//
 set directory=~/tmp/vim/swap//
 set undodir=~/tmp/vim/undo//
 
+set fo-=t    
+
+set fillchars+=vert:\│
+hi vertsplit guifg=fg guibg=bg
+
 let g:vimfiler_as_default_explorer = 1
 " let g:unite_enable_start_insert = 1
 nnoremap <Leader>e :VimFilerExplorer<cr>
@@ -30,13 +34,13 @@ let g:unite_split_rule = "botright"
 let g:unite_force_overwrite_statusline = 0
 let g:unite_winheight = 10
 
-call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
-      \ 'ignore_pattern', join([
-      \ '\.git/',
-      \ ], '\|'))
-
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
+" call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
+"       \ 'ignore_pattern', join([
+"       \ '\.git/',
+"       \ ], '\|'))
+"
+" call unite#filters#matcher_default#use(['matcher_fuzzy'])
+" call unite#filters#sorter_default#use(['sorter_rank'])
 
 nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer file_rec/async:!<cr>
 
@@ -60,6 +64,8 @@ if has("gui_running")
 		set guifont=Sauce\ Code\ Pro\ for\ Powerline:h15
 	endif
 endif
+
+filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -87,10 +93,29 @@ Plugin 'tomtom/tcomment_vim'
 Plugin 'vim-scripts/closetag.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
 
+
+Plugin 'ervandew/supertab'
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+
+" make YCM compatible with UltiSnips (using supertab)
+let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+let g:SuperTabDefaultCompletionType = '<C-n>'
+
+" better key bindings for UltiSnipsExpandTrigger
+let g:UltiSnipsExpandTrigger = "<tab>"
+let g:UltiSnipsJumpForwardTrigger = "<tab>"
+let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
+
+Plugin 'terryma/vim-multiple-cursors'
 " This does what it says on the tin. It will check your file on open too, not
 " just on save.
 " " You might not want this, so just leave it out if you don't.
 let g:syntastic_check_on_open=1
+let g:syntastic_javascript_checkers = ['jshint']
+let g:syntastic_html_tidy_exec = 'tidy5'
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietary attribute \"cd-", "trimming empty <", "unescaped &" , "lacks \"action", "is not recognized!", "discarding unexpected"]
 "
 " The following are examples of different formats supported.
 " Keep Plugin commands between vundle#begin/end.
@@ -110,7 +135,7 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
-filetype plugin indent on    " required
+filetype plugin indent on
 
 set expandtab
 set shiftwidth=4

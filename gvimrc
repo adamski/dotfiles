@@ -1,5 +1,5 @@
 color codeschool
-set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+set guifont=Source\ Code\ Pro\ for\ Powerline:h16
 let g:NERDTreeWinPos = "right"
 set guioptions-=T " Removes top toolbar
 set guioptions-=r " Removes right hand scroll bar
