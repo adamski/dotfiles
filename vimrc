@@ -85,6 +85,8 @@ Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'scrooloose/syntastic'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'vim-scripts/closetag.vim'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+
 " This does what it says on the tin. It will check your file on open too, not
 " just on save.
 " " You might not want this, so just leave it out if you don't.

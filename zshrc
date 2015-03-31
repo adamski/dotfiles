@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/adamwilson/.oh-my-zsh
+export ZSH=/Users/adamelemental/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -51,6 +51,8 @@ plugins=(git)
 
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
+export NDK_MODULE_PATH=~/dev/Android/modules/aubio-android
+export PATH=$PATH:~/dev/SDKs/android-sdk/platform-tools
 
 source $ZSH/oh-my-zsh.sh
 
