@@ -16,6 +16,11 @@ set backupdir=~/tmp/vim/backup//
 set directory=~/tmp/vim/swap//
 set undodir=~/tmp/vim/undo//
 
+set number
+set numberwidth=3
+" set cpoptions+=n
+set relativenumber
+
 set fo-=t    
 set number
 
