@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/adamelemental/.oh-my-zsh
+export ZSH=/Users/adamwilson/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -70,24 +70,28 @@ zle -N zle-keymap-select
 export KEYTIMEOUT=20
 bindkey -v
 
-bindkey "${key[Up]}" up-line-or-local-history
-bindkey "${key[Down]}" down-line-or-local-history
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
-up-line-or-local-history() {
-    zle set-local-history 1
-    zle up-line-or-history
-    zle set-local-history 0
-}
-zle -N up-line-or-local-history
-down-line-or-local-history() {
-    zle set-local-history 1
-    zle down-line-or-history
-    zle set-local-history 0
-}
-zle -N down-line-or-local-history
-
-bindkey "^[[1;5A" up-line-or-history    # [CTRL] + Cursor up
-bindkey "^[[1;5B" down-line-or-history  # [CTRL] + Cursor down"]]]]"
+#
+# bindkey "${key[Up]}" up-line-or-local-history
+# bindkey "${key[Down]}" down-line-or-local-history
+#
+# up-line-or-local-history() {
+#     zle set-local-history 1
+#     zle up-line-or-history
+#     zle set-local-history 0
+# }
+# zle -N up-line-or-local-history
+# down-line-or-local-history() {
+#     zle set-local-history 1
+#     zle down-line-or-history
+#     zle set-local-history 0
+# }
+# zle -N down-line-or-local-history
+#
+# bindkey "^[[1;5A" up-line-or-history    # [CTRL] + Cursor up
+# bindkey "^[[1;5B" down-line-or-history  # [CTRL] + Cursor down"]]]]"
 
 # Use jk for ESC
 # bindkey -M viins 'jk' vi-cmd-mode

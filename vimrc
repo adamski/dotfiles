@@ -17,6 +17,7 @@ set directory=~/tmp/vim/swap//
 set undodir=~/tmp/vim/undo//
 
 set fo-=t    
+set number
 
 set fillchars+=vert:\│
 hi vertsplit guifg=fg guibg=bg
@@ -84,7 +85,8 @@ Plugin 'tpope/vim-sensible'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'moll/vim-node'
 Plugin 'marijnh/tern_for_vim'
-Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
+Plugin 'Raimondi/delimitMate'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'nathanaelkane/vim-indent-guides'
