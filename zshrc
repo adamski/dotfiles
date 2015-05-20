@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/adamwilson/.oh-my-zsh
+export ZSH=/Users/adamelemental/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -70,8 +70,16 @@ zle -N zle-keymap-select
 export KEYTIMEOUT=20
 bindkey -v
 
-bindkey "^[[A" history-beginning-search-backward
-bindkey "^[[B" history-beginning-search-forward
+# bindkey "^[[A" history-beginning-search-backward
+# bindkey "^[[B" history-beginning-search-forward
+
+# History Search
+autoload history-search-end
+zle -N history-beginning-search-backward-end history-search-end
+zle -N history-beginning-search-forward-end history-search-end
+
+bindkey  '^[[A'  history-beginning-search-backward-end
+bindkey  '^[[B'  history-beginning-search-forward-end
 
 #
 # bindkey "${key[Up]}" up-line-or-local-history
