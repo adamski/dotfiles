@@ -23,10 +23,23 @@ set fillchars+=vert:\│
 hi vertsplit guifg=fg guibg=bg
 
 let g:vimfiler_as_default_explorer = 1
+	
+" Enable file operation commands.
+" Edit file by tabedit.
+call vimfiler#custom#profile('default', 'context', { 'safe' : 0, 'edit_action' : 'tabopen' })
+nnoremap <C-t> vimfiler#do_action('tabopen')
+
+" Like Textmate icons.
+let g:vimfiler_tree_leaf_icon = ' '
+let g:vimfiler_tree_opened_icon = '▾'
+let g:vimfiler_tree_closed_icon = '▸'
+let g:vimfiler_file_icon = '-'
+let g:vimfiler_marked_file_icon = '*'
+
 " let g:unite_enable_start_insert = 1
 nnoremap <Leader>e :VimFilerExplorer<cr>
 " nnoremap <Leader>f :Unite -start-insert file<CR>
-nnoremap <Leader>b :Unite buffer<cr>
+" nnoremap <Leader>b :Unite buffer<cr>
 
 " Unite settings
 
@@ -43,21 +56,29 @@ let g:unite_winheight = 10
 " call unite#filters#matcher_default#use(['matcher_fuzzy'])
 " call unite#filters#sorter_default#use(['sorter_rank'])
 
-nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer file_rec/async:!<cr>
+" nnoremap <C-P> :<C-u>Unite  -buffer-name=files   -start-insert buffer -input= -resume file_rec/async:!<cr>
+" call unite#custom#profile('files', 'ignorecase', 1)
 
-autocmd FileType unite call s:unite_settings()
 
-function! s:unite_settings()
-	let b:SuperTabDisabled=1
-	imap <buffer> <C-j>   <Plug>(unite_select_next_line)
-	imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
-	imap <silent><buffer><expr> <C-x> unite#do_action('split')
-	imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
-	imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+nnoremap <space>y :Unite history/yank<cr>
+nnoremap <space>s :Unite -quick-match buffer<cr>
+"
+" autocmd FileType unite call s:unite_settings()
+"
+" function! s:unite_settings()
+" 	let b:SuperTabDisabled=1
+" 	imap <buffer> <C-j>   <Plug>(unite_select_next_line)
+" 	imap <buffer> <C-k>   <Plug>(unite_select_previous_line)
+" 	imap <silent><buffer><expr> <C-x> unite#do_action('split')
+" 	imap <silent><buffer><expr> <C-v> unite#do_action('vsplit')
+" 	imap <silent><buffer><expr> <C-t> unite#do_action('tabopen')
+"
+" 	nmap <buffer> <ESC> <Plug>(unite_exit)
+" endfunction
+" " end Unite settings
 
-	nmap <buffer> <ESC> <Plug>(unite_exit)
-endfunction
-" end Unite settings
+let g:CommandTTraverseSCM = 'dir'
+let g:CommandTMaxHeight = 20
 
 if has("gui_running")
 	let s:uname = system("uname")
@@ -79,6 +100,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'Lokaltog/powerline', {'rtp': 'powerline/bindings/vim/'}
 Plugin 'Shougo/vimfiler.vim'
 Plugin 'Shougo/unite.vim'
+Plugin 'wincent/command-t'
 Plugin 'tpope/vim-surround'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'tpope/vim-sensible'
@@ -99,6 +121,7 @@ Plugin 'octol/vim-cpp-enhanced-highlight'
 Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
+Plugin 'othree/xml.vim'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
