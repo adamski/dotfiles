@@ -77,8 +77,10 @@ nnoremap <space>s :Unite -quick-match buffer<cr>
 " endfunction
 " " end Unite settings
 
-let g:CommandTTraverseSCM = 'dir'
+" Comment-T options
+"let g:CommandTTraverseSCM = 'dir'
 let g:CommandTMaxHeight = 20
+nnoremap <silent> <leader>b :CommandTMRU<CR>
 
 if has("gui_running")
 	let s:uname = system("uname")
