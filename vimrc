@@ -79,6 +79,7 @@ nnoremap <space>s :Unite -quick-match buffer<cr>
 
 " Comment-T options
 "let g:CommandTTraverseSCM = 'dir'
+let g:CommandTFileScanner = 'git'  
 let g:CommandTMaxHeight = 20
 nnoremap <silent> <leader>b :CommandTMRU<CR>
 
