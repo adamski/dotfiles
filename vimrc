@@ -15,6 +15,7 @@ set laststatus=2
 set backupdir=~/tmp/vim/backup//
 set directory=~/tmp/vim/swap//
 set undodir=~/tmp/vim/undo//
+set hidden
 
 set noswapfile
 
