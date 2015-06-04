@@ -16,17 +16,61 @@ set backupdir=~/tmp/vim/backup//
 set directory=~/tmp/vim/swap//
 set undodir=~/tmp/vim/undo//
 
+set noswapfile
+
+if has('persistent_undo')        "check if your vim version supports it
+    set undofile                 "turn on the feature  
+endif 
+
 set fo-=t    
 set number
 
 set fillchars+=vert:\│
 hi vertsplit guifg=fg guibg=bg
 
-let g:vimfiler_as_default_explorer = 1
+" netrw settings (mimic NERDTree)
+" Toggle Vexplore with Ctrl-E
+function! ToggleVExplorer()
+  if exists("t:expl_buf_num")
+      let expl_win_num = bufwinnr(t:expl_buf_num)
+      if expl_win_num != -1
+          let cur_win_nr = winnr()
+          exec expl_win_num . 'wincmd w'
+          close
+          exec cur_win_nr . 'wincmd w'
+          unlet t:expl_buf_num
+      else
+          unlet t:expl_buf_num
+      endif
+  else
+      let g:netrw_chgwin = winnr() " this is failed attempt to get netrw to open a new file in the original window
+      exec '1wincmd w'
+      Vexplore
+      let t:expl_buf_num = bufnr("%")
+  endif
+endfunction
+map <silent> <C-E> :call ToggleVExplorer()<CR>
+
+" Hit enter in the file browser to open the selected
+" file with :vsplit to the right of the browser.
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 20
+
+" Default to tree mode
+let g:netrw_liststyle=3
+" let g:netrw_preview = 1
+
+" Change directory to the current buffer when opening files.
+" set autochdir
+
+" end netrw settings
+
+" let g:vimfiler_as_default_explorer = 1
 	
 " Enable file operation commands.
 " Edit file by tabedit.
-call vimfiler#custom#profile('default', 'context', { 'safe' : 0, 'edit_action' : 'tabopen' })
+" call vimfiler#custom#profile('default', 'context', { 'safe' : 0, 'edit_action' : 'tabopen' })
 nnoremap <C-t> vimfiler#do_action('tabopen')
 
 " Like Textmate icons.
@@ -47,6 +91,8 @@ let g:unite_enable_start_insert = 1
 let g:unite_split_rule = "botright"
 let g:unite_force_overwrite_statusline = 0
 let g:unite_winheight = 10
+
+let g:ackprg = 'ag --nogroup --nocolor --column'
 
 " call unite#custom_source('file_rec,file_rec/async,file_mru,file,buffer,grep',
 "       \ 'ignore_pattern', join([
@@ -119,12 +165,14 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'vim-scripts/closetag.vim'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-
+Plugin 'tpope/vim-vinegar.git'
 
 Plugin 'ervandew/supertab'
 Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'othree/xml.vim'
+Plugin 'idbrii/AsyncCommand'
+Plugin 'mileszs/ack.vim'
 
 " make YCM compatible with UltiSnips (using supertab)
 let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
