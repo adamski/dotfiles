@@ -130,11 +130,38 @@ let g:CommandTFileScanner = 'git'
 let g:CommandTMaxHeight = 20
 nnoremap <silent> <leader>b :CommandTMRU<CR>
 
-if v:version >= 700
-    au BufLeave * let b:winview = winsaveview()
-    au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
-endif
+" Previous window position saving
+" if v:version >= 700
+"     au BufLeave * let b:winview = winsaveview()
+"     au BufEnter * if(exists('b:winview')) | call winrestview(b:winview) | endif
+" endif
 
+" Save current view settings on a per-window, per-buffer basis.
+function! AutoSaveWinView()
+    if !exists("w:SavedBufView")
+        let w:SavedBufView = {}
+    endif
+    let w:SavedBufView[bufnr("%")] = winsaveview()
+endfunction
+
+" Restore current view settings.
+function! AutoRestoreWinView()
+    let buf = bufnr("%")
+    if exists("w:SavedBufView") && has_key(w:SavedBufView, buf)
+        let v = winsaveview()
+        let atStartOfFile = v.lnum == 1 && v.col == 0
+        if atStartOfFile && !&diff
+            call winrestview(w:SavedBufView[buf])
+        endif
+        unlet w:SavedBufView[buf]
+    endif
+endfunction
+
+" When switching buffers, preserve window view.
+if v:version >= 700
+    autocmd BufLeave * call AutoSaveWinView()
+    autocmd BufEnter * call AutoRestoreWinView()
+endif
 
 if has("gui_running")
 	let s:uname = system("uname")
